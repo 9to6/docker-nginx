@@ -1,0 +1,14 @@
+version: "3"
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - ./www:/usr/share/nginx/www
+    links:
+      - php
+  php:
+    image: php:7.1.5-fpm-alpine
+    volumes:
+      - ./www:/usr/share/nginx/www
