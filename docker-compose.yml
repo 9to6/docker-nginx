@@ -1,38 +1,14 @@
-version: "3.2"
+version: "3"
 services:
   web:
     build: .
     ports:
       - "80:80"
     volumes:
-      - wordpress:/var/www/html
-    depends_on:
+      - ./www:/usr/share/nginx/www
+    links:
       - php
   php:
-    image: wordpress:4.8-php7.1-fpm-alpine
-    depends_on:
-      - db
-    restart: always
-    ports:
-      - "9000:9000"
+    image: php:7.1.5-fpm-alpine
     volumes:
-      - wordpress:/var/www/html
-  db:
-    image: mariadb:10.2.6
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: rootwordpress
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
-volumes:
-  db_data:
-    driver_opts:
-      type: none
-      device: /home/ktg/projects/docker-wordpress-nginx/db_data
-      o: bind
-  wordpress:
+      - ./www:/usr/share/nginx/www
