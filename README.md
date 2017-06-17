@@ -40,26 +40,26 @@ This uses Dockerfile.nginx with nginx-site.conf
 1. Build
 
 ```bash
-sudo docker build -f Dockerfile.nginx -t nginx_pure_image .
+$ sudo docker build -f Dockerfile.nginx -t nginx_pure_image .
 ```
 
 2. Run
 
 ```bash
-sudo docker run -p 80:80 --name nginx-pure nginx_pure_image
+$ sudo docker run -p 80:80 --name nginx-pure nginx_pure_image
 ```
 
 or using https also.
 
 
 ```bash
-sudo docker run -p 80:80 -p 443:443 --name nginx-pure nginx_pure_image
+$ sudo docker run -p 80:80 -p 443:443 --name nginx-pure nginx_pure_image
 ```
 
 3. Remove
 
 ```bash
-sudo docker rm -f nginx-pure
+$ sudo docker rm -f nginx-pure
 ```
 
 ## Building nginx with php-fpm 7.1.5
@@ -75,14 +75,14 @@ This uses docker-compose.yml, Dockerfile and nginx.conf
 1. Run
 
 ```bash
-sudo docker-compose up -d
+$ sudo docker-compose up -d
 ```
 
 2. Clean
 
 ```bash
-sudo docker-compose down
-sudo docker volume prume -f
+$ sudo docker-compose down
+$ sudo docker volume prume -f
 ```
 
 ## You want to use https too.
@@ -102,7 +102,7 @@ $ ./certbot-auto --help
 change domain to your domain.  
 
 ```
-./certbot-auto certonly --standalone --email your@email.com -d nbellocam.me -d www.nbellocam.me
+$ ./certbot-auto certonly --standalone --email your@email.com -d example.com -d www.example.com
 ```
 
 ### For renew certificates
@@ -110,5 +110,5 @@ change domain to your domain.
 Add cron job.
 
 ```
-sudo echo "0 1 * * * /home/user/certbot-auto renew --quiet --renew-hook \"/usr/bin/docker exec nginx-simple nginx -s reload\"" | sudo tee -a /var/spool/cron/root
+$ sudo echo "0 1 * * * /home/user/certbot-auto renew --quiet --renew-hook \"/usr/bin/docker exec nginx-simple nginx -s reload\"" | sudo tee -a /var/spool/cron/root
 ```
