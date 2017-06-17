@@ -2,13 +2,24 @@ version: "3"
 services:
   web:
     build: .
+    container_name: nginx-simple
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-      - ./www:/usr/share/nginx/www
-    links:
+      - web:/usr/share/nginx/html
+      - errors:/usr/share/nginx/errors
+      - /etc/letsencrypt:/etc/letsencrypt
+    depends_on:
       - php
   php:
     image: php:7.1.5-fpm-alpine
+    container_name: nginx-simple-php
     volumes:
-      - ./www:/usr/share/nginx/www
+      - errors:/usr/share/nginx/errors
+      - web:/usr/share/nginx/html
+
+volumes:
+  web:
+  errors:
+    
