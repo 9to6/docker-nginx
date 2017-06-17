@@ -110,5 +110,5 @@ change domain to your domain.
 Add cron job.
 
 ```
-sudo echo "0 1 * * * /home/ktg/certbot-auto renew --quiet --renew-hook "/usr/bin/docker exec nginx-simple nginx -s reload" | tee -a /var/spool/cron/root
+sudo echo "0 1 * * * /home/user/certbot-auto renew --quiet --renew-hook \"/usr/bin/docker exec nginx-simple nginx -s reload\"" | sudo tee -a /var/spool/cron/root
 ```
